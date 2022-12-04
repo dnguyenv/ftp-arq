@@ -10,7 +10,8 @@ from collections import namedtuple
 
 RTT = 0.1 
 
-ACK_HOST = '0.0.0.0'
+#ACK_HOST = '0.0.0.0'
+ACK_HOST = ''
 ACK_PORT = 7737 
 
 TYPE_DATA = "0101010101010101"
@@ -52,7 +53,7 @@ MSS =  args.MSS_SIZE
 
 
 def send_packet_to_host(packet, host, port, socket, sequence_no):    
-    client_socket.sendto(packet,(SEND_HOST,SEND_PORT)) 
+    client_socket.sendto(packet,(host,port)) 
 
 # Handle the packets sending, as described in the project requirement
 def rdt_send(file_content, client_socket, host, port):
@@ -118,7 +119,7 @@ def ack_processing():
     ack_socket.bind((ACK_HOST, ACK_PORT))
 
     while True:        
-        response = pickle.loads(ack_socket.recv(65001))
+        response = pickle.loads(ack_socket.recv(ACK_PORT))
         # If incoming packet is an ACK
         if response[2] == TYPE_ACK:
             current_ack_sn = response[0]-1

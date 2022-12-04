@@ -58,6 +58,8 @@ Now you can change the loss probability value (`p`) in the server component exec
 
 In order to allow traffic in/out to/from NCSU lab's box, you probably need to make changes to the firewall
 
+In this project, I use UDP/7735 for file transfer UDP/7737 for ACK transactions purpose
+
 Enable UDP on port 7735: 
 
 ```code
@@ -69,15 +71,28 @@ $ sudo ufw reload
 Enable TCP on port 7737:
 
 ```code
-$ sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 7737 -j ACCEPT
+$ sudo iptables -I INPUT -p udp -s 0.0.0.0/0 --dport 7737 -j ACCEPT
 $ sudo ufw allow 7737
 $ sudo ufw reload
 ```
 
-Enable TCP on port 65001:
+
+## This is only some tricks for tunneling from TCP to UDP through ssh (not needed for the current settings)
+
+Tunneling:
+
+Local:
 
 ```code
-$ sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 65001 -j ACCEPT
-$ sudo ufw allow 65001
-$ sudo ufw reload
+$ ssh -L 65001:localhost:65001 dvnguye3@152.7.177.131
 ```
+
+Server:
+```code
+mkfifo /tmp/fifo
+nc -l -p 65001 < /tmp/fifo | nc localhost 7737 >/tmp/fifo
+```
+
+Local:
+mkfifo /tmp/fifo
+sudo nc -l 7737 -u  < /tmp/fifo | nc localhost 65001 >/tmp/fifo
