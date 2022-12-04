@@ -32,8 +32,10 @@ $ python3 Simple_ftp_server.py port# file-name p
 For example:
 
 ```code
-$ python3 Simple_ftp_server.py 7735 test.pdf 0.01
+$ python3 Simple_ftp_server.py 7735 duyhard_received_file.pdf 0.01
 ``` 
+
+In this example, `duyhard_received_file.pdf` located in the same directory with the `Simple_ftp_server.py` is the resulting file received from the client component if everything goes well.
 
 ### Run the client component on the client node
 
@@ -45,8 +47,10 @@ Again, before running this command, make sure `server-host-name` is reachable fr
 For example:
 
 ```code
-$ python3 Simple_ftp_client.py 127.0.0.1 7735 RAID2021.pdf 1 500
+$ python3 Simple_ftp_client.py 152.7.177.131 7735 RAID2021.pdf 1 500
 ``` 
+
+Notice that in this example, I am connecting to server `152.7.177.131` from my laptop over the internet, so it's a multiple-hop deployment
 
 Now you can change the loss probability value (`p`) in the server component execution command, Window size value `N`, and the `MSS` value on the client side to experiment the effect of those values on the total delay of the file transferring process, especially when you transfer a large file. 
 
@@ -67,5 +71,13 @@ Enable TCP on port 7737:
 ```code
 $ sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 7737 -j ACCEPT
 $ sudo ufw allow 7737
+$ sudo ufw reload
+```
+
+Enable TCP on port 65001:
+
+```code
+$ sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 65001 -j ACCEPT
+$ sudo ufw allow 65001
 $ sudo ufw reload
 ```
