@@ -73,8 +73,8 @@ def entrance():
     while not DONE:
         # Receive data from the sender
         received_data1, addr = server_socket.recvfrom(ACK_PORT)
-        ACK_HOST_NAME = addr[0]
-        print(f'ACK_HOST_NAME: {ACK_HOST_NAME}')
+        #ACK_HOST_NAME = addr[0]        
+        #print(f'ACK_HOST_NAME: {ACK_HOST_NAME}')
         received_data = pickle.loads(received_data1)
         packet_sn, packet_checksum, packet_type, packet_data = received_data[0], received_data[1], received_data[2], received_data[3]
         #Check if the packet is last packet
