@@ -72,7 +72,7 @@ def entrance():
     DONE = False # completion flag
     while not DONE:
         # Receive data from the sender
-        received_data1, addr = server_socket.recvfrom(65001)
+        received_data1, addr = server_socket.recvfrom(ACK_PORT)
         ACK_HOST_NAME = addr[0]
         print(f'ACK_HOST_NAME: {ACK_HOST_NAME}')
         received_data = pickle.loads(received_data1)
