@@ -95,10 +95,12 @@ $ ssh -L 65001:localhost:65001 dvnguye3@152.7.177.131
 
 Server:
 ```code
-mkfifo /tmp/fifo
-nc -l -p 65001 < /tmp/fifo | nc localhost 7737 >/tmp/fifo
+$ mkfifo /tmp/fifo
+$ nc -l -p 65001 < /tmp/fifo | nc localhost 7737 >/tmp/fifo
 ```
 
 Local:
-mkfifo /tmp/fifo
-sudo nc -l 7737 -u  < /tmp/fifo | nc localhost 65001 >/tmp/fifo
+```code
+$ mkfifo /tmp/fifo
+$ sudo nc -l 7737 -u  < /tmp/fifo | nc localhost 65001 >/tmp/fifo
+```
