@@ -18,6 +18,12 @@ To run the program, make sure you have these prerequisites:
 - Two compute nodes, at least 3 hops away from each other. In this experiment, I use an Ubuntu box from NCSU's lab following [this link](https://vcl.ncsu.edu/scheduling/index.php?mode=viewRequests&offset=300) to host the server component, to which I connect from the client component running on my laptop (MacOS)
 - The server obviously needs to be reachable from the client (both via UDP and TCP). This entails firewall configuration both sides (as needed) to allow the traffic between them
 
+## Deployment overview
+
+Here is the overview of the deployment  
+
+![Arch](deployment.png)
+
 ## Run the program
 
 Follow these steps to run the program:
